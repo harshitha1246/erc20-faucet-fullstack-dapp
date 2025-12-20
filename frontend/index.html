@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERC-20 Faucet DApp</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 { color: #667eea; margin-bottom: 10px; text-align: center; font-size: 28px; }
+        .subtitle { color: #999; text-align: center; margin-bottom: 30px; font-size: 14px; }
+        .wallet-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .wallet-address {
+            color: #666;
+            font-size: 12px;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #1565c0;
+        }
+        .error-box {
+            background: #ffebee;
+            border-left: 4px solid #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #c62828;
+        }
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #2e7d32;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #2e7d32;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-label { color: #999; font-size: 12px; margin-bottom: 5px; }
+        .stat-value { color: #333; font-size: 20px; font-weight: bold; }
+        .loading { color: #667eea; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🪙 ERC-20 Faucet</h1>
+        <p class="subtitle">Claim free tokens every 24 hours</p>
+        
+        <div id="message"></div>
+        
+        <div class="wallet-section">
+            <h3 style="margin-bottom: 10px; color: #333;">Wallet Connection</h3>
+            <button class="btn-primary" id="connectBtn" onclick="connectWallet()">Connect Wallet</button>
+            <div id="walletInfo" style="display: none;">
+                <p style="color: #666; font-size: 12px; margin-bottom: 5px;">Connected Wallet:</p>
+                <div class="wallet-address" id="walletAddress"></div>
+            </div>
+        </div>
+        
+        <div id="statsSection" style="display: none;">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-label">Your Balance</div>
+                    <div class="stat-value" id="balance">0 FTK</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Claimed Total</div>
+                    <div class="stat-value" id="claimed">0 FTK</div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn-primary" id="claimBtn" onclick="claimTokens()" style="display: none;">Claim 10 FTK</button>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="https://github.com/harshitha1246/erc20-faucet-fullstack-dapp" target="_blank" 
+               style="color: #667eea; text-decoration: none; font-size: 12px;">
+                📚 View GitHub Repository
+            </a>
+        </div>
+    </div>
+    
+    <script src="/main.js" type="module"></script>
+</body>
+</html>
